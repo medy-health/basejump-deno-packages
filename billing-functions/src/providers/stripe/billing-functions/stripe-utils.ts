@@ -36,9 +36,7 @@ export function stripeSubscriptionToBasejumpSubscription(
     canceled_at: subscription.canceled_at
       ? unixToIso(subscription.canceled_at)
       : null,
-    current_period_start: new Date(
-      subscription.current_period_start
-    ).toISOString(),
+    current_period_start: unixToIso(subscription.current_period_start),
     current_period_end: unixToIso(subscription.current_period_end),
     created: unixToIso(subscription.created),
     ended_at: subscription.ended_at ? unixToIso(subscription.ended_at) : null,
