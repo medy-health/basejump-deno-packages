@@ -53,9 +53,12 @@ export function stripeWebhookHandler({
                         "Customer created/updated/deleted event missing basejump_account_id"
                     );
                 }
+
+                const retrievedCustomer = await stripeClient.customers.retrieve(customerData.id);
+
                 const customer = stripeCustomerToBasejumpCustomer(
                     accountId,
-                    customerData
+                    retrievedCustomer
                 );
 
                 return {provider: 'stripe', customer};
@@ -72,9 +75,11 @@ export function stripeWebhookHandler({
                     );
                 }
 
+                const retrievedSubscription = await stripeClient.subscriptions.retrieve(subscriptionData.id);
+
                 const subscription = stripeSubscriptionToBasejumpSubscription(
                     accountId,
-                    subscriptionData
+                    retrievedSubscription
                 );
 
                 return {
